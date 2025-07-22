@@ -1,0 +1,33 @@
+from pygame.math import Vector2
+from pygame import Color
+from pygame.font import Font
+
+
+# Game
+CELL_SIZE = 30
+COUNT_CELLS_WIDTH = 10
+COUNT_CELLS_HEIGHT = 10
+SCREEN_WIDTH = CELL_SIZE * COUNT_CELLS_WIDTH
+SCREEN_HEIGHT = CELL_SIZE * COUNT_CELLS_HEIGHT
+SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
+TICK_DELAY = 50
+
+# Snake
+SNAKE_SPAWN_COORD = Vector2(COUNT_CELLS_WIDTH // 2, COUNT_CELLS_HEIGHT // 2)
+
+# Colors
+SNAKE_COLOR = Color(0, 255, 0)
+APPLE_COLOR = Color(255, 0, 0)
+BG_COLOR = Color(0, 0, 0)
+
+# Font
+FONT_PATH = 'snake_ai/game/fonts/Roboto-Regular.ttf'
+FONT_SIZE = 24
+FONT_COLOR = Color(255, 255, 255)
+
+# Score
+MAX_SCORE = COUNT_CELLS_WIDTH * COUNT_CELLS_HEIGHT
+SCORE_RENDER_POS = Vector2(0, 0)
+
+# Ai
+INPUT_SIZE = 11
