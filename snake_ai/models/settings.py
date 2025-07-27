@@ -1,6 +1,5 @@
 from pygame.math import Vector2
 from pygame import Color
-from pygame.font import Font
 
 
 # Game
@@ -30,4 +29,8 @@ MAX_SCORE = COUNT_CELLS_WIDTH * COUNT_CELLS_HEIGHT
 SCORE_RENDER_POS = Vector2(0, 0)
 
 # Ai
-INPUT_SIZE = 11
+APPLE_REWARD = 100
+DIE_REWARD = -100
+STEP_REWARD = -1
+APPROACHING_APPLE_REWARD = 2
+INVALID_MOVE = -10

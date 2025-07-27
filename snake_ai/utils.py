@@ -5,19 +5,6 @@ import torch
 
 
 class Utils:
-    DIRECTION_TO_INT = {
-        Direction.UP: 0,
-        Direction.DOWN: 1,
-        Direction.LEFT: 2,
-        Direction.RIGHT: 3
-    }
-    INT_TO_DIRECTION = {
-        0: Direction.UP,
-        1: Direction.DOWN,
-        2: Direction.LEFT,
-        3: Direction.RIGHT
-    }
-
     @staticmethod
     def vector2_to_tuple(value: Vector2) -> tuple[int, int]:
         '''
@@ -29,24 +16,31 @@ class Utils:
     @staticmethod
     def state_to_tensor(state: State) -> torch.Tensor:
         features = [
-            state.cell_up,
-            state.cell_right,
-            state.cell_down,
-            state.cell_left,
-            state.wall_up,
-            state.wall_right,
-            state.wall_down,
-            state.wall_left,
-            state.direction_up,
-            state.direction_right,
-            state.direction_down,
+            state.danger_straight,
+            state.danger_right,
+            state.danger_left,
             state.direction_left,
-            state.food_up,
+            state.direction_right,
+            state.direction_up,
+            state.direction_down,
+            state.food_straight,
             state.food_right,
-            state.food_down,
             state.food_left
         ]
         return torch.tensor(features, dtype=torch.float32)
+    
+    @staticmethod
+    def relative_action_to_direction(current_direction: Direction, action: int) -> Direction:
+        # action: 0 - straight, 1 - right, 2 - left
+        directions = [Direction.RIGHT, Direction.DOWN, Direction.LEFT, Direction.UP]
+        idx = directions.index(current_direction)
+        if action == 0:
+            new_idx = idx
+        elif action == 1:
+            new_idx = (idx + 1) % 4
+        else:
+            new_idx = (idx - 1) % 4
+        return directions[new_idx]
     
     @staticmethod
     def direction_to_int(value: Direction) -> int:
@@ -54,4 +48,5 @@ class Utils:
     
     @staticmethod
     def int_to_direction(value: int) -> Direction:
+        return Utils.INT_TO_DIRECTION[value]
         return Utils.INT_TO_DIRECTION[value]

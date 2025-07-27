@@ -1,15 +1,17 @@
-import torch
 import torch.nn as nn
+import torch.nn.functional as F
 
 
-class QNet(torch.nn.Module):
-    def __init__(self) -> None:
+class QNet(nn.Module):
+    def __init__(self):
         super(QNet, self).__init__()
-        self.input_layer = nn.Linear(16, 256)
-        self.hidden_layer = nn.Linear(256, 256)
-        self.output_layer = nn.Linear(256, 4)
+        self.input_layer = nn.Linear(10, 128)
+        self.hidden1 = nn.Linear(128, 64)
+        self.output_layer = nn.Linear(64, 3)
     
-    def forward(self, data) -> int:
-        data = self.input_layer(data)
-        data = self.hidden_layer(data)
+    def forward(self, data):
+        data = F.relu(self.input_layer(data))
+        data = F.relu(self.hidden1(data))
+        return self.output_layer(data)
+        data = F.relu(self.hidden2(data))
         return self.output_layer(data)
